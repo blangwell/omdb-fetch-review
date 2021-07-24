@@ -1,0 +1,22 @@
+body, .movie-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.movie-details {
+    padding: 50px;
+    margin: 25px;
+    border: 2px solid lightgray;
+    max-width: 400px;
+}
+
+.movie-details__title {
+    font-size: 2em;
+}
+
+#page-title {
+    font-family: 'Titan One', cursive;
+}
