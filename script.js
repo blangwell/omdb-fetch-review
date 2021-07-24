@@ -19,7 +19,7 @@ async function searchOMDB() {
 
 async function getMovieDetails(imdbID) {
 	clearResultContainer();
-	let response = await fetch(`http://www.omdbapi.com/?apikey=*******&i=${imdbID}`);
+	let response = await fetch(`http://www.omdbapi.com/?apikey=******&i=${imdbID}`);
 	let data = await response.json();
 	createMovieElements(data, false);
 }
@@ -27,8 +27,9 @@ async function getMovieDetails(imdbID) {
 function createMovieElements (data, showDetailsButton) {
 	let elementsToAppend = [];
 
-	let elementContainer = document.createElement("div");
-	elementContainer.classList = "animate__animated animate__fadeInUp movie-details";
+	let bsCard = document.createElement("div");
+	bsCard.classList = "animate__animated animate__fadeInUp card";
+	bsCard.style.width = "18rem";
 
 	let posterElement = document.createElement("img");
 	if (data.Poster.toLowerCase() === "n/a") {
@@ -36,9 +37,11 @@ function createMovieElements (data, showDetailsButton) {
 	} else {
 		posterElement.src = data.Poster;
 	}
-	posterElement.style.width = "300px";
-	posterElement.style.height = "auto";
-	elementsToAppend.push(posterElement);
+	posterElement.classList = "card-img-top movie-details__poster";
+	bsCard.appendChild(posterElement);
+
+	let bsCardBody = document.createElement("div");
+	bsCardBody.classList = "card-body";
 
 	let titleElement = document.createElement("h3");
 	titleElement.innerText = data.Title;	
@@ -49,16 +52,16 @@ function createMovieElements (data, showDetailsButton) {
 	yearElement.innerText = data.Year;
 	elementsToAppend.push(yearElement);
 
+	if (data.Actors) {
+		let actorsElement = document.createElement("p");
+		actorsElement.innerText = "Cast: " + data.Actors;
+		elementsToAppend.push(actorsElement);
+	}
+
 	if (data.Plot) {
 		let plotElement = document.createElement("p");
 		plotElement.innerText = data.Plot;
 		elementsToAppend.push(plotElement);
-	}
-
-	if (data.Actors) {
-		let actorsElement = document.createElement("p");
-		actorsElement.innerText = "Cast:\n" + data.Actors;
-		elementsToAppend.push(actorsElement);
 	}
 
 	if (showDetailsButton) {
@@ -71,10 +74,11 @@ function createMovieElements (data, showDetailsButton) {
 	}
 
 	elementsToAppend.forEach(element => {
-		elementContainer.appendChild(element);
+		bsCardBody.appendChild(element);
 	});
 
-	resultContainer.append(elementContainer);
+	bsCard.appendChild(bsCardBody);
+	resultContainer.append(bsCard);
 }
 
 function clearResultContainer() {

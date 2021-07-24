@@ -1,8 +1,9 @@
-body, .movie-details {
-    display: flex;
+
+body {
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     font-family: 'Roboto', sans-serif;
 }
 
@@ -10,7 +11,11 @@ body, .movie-details {
     padding: 50px;
     margin: 25px;
     border: 2px solid lightgray;
-    max-width: 400px;
+}
+
+.movie-details__poster {
+    width: 100%;
+    height: auto;
 }
 
 .movie-details__title {
@@ -18,5 +23,6 @@ body, .movie-details {
 }
 
 #page-title {
-    font-family: 'Titan One', cursive;
+    font-size: 2.5em;
+    text-align: center;
 }
